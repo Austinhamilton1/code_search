@@ -150,7 +150,7 @@ class PythonParser(Parser):
                 self.documents_ = [Document(self.src_file, self.src_file, data, (0, line_count))]
         elif granularity == 'class':
             #look for classes
-            class_regex = re.compile(r'$\s*class (.+?):.*$', re.MULTILINE)
+            class_regex = re.compile(r'^\s*class (.+?):.*$', re.MULTILINE)
             with open(self.src_file, 'r') as file:
                 #we need to match regex and readlines so do both of these
                 data = file.read()
@@ -171,7 +171,7 @@ class PythonParser(Parser):
                     #create a document for the class
                     self.documents_.append(Document(self.src_file, match.group(1), code_block[0], (code_block[1], code_block[1])))
         elif granularity == 'method':
-            method_regex = re.compile(r'$\s*def (.+?):.*$', re.MULTILINE)
+            method_regex = re.compile(r'^\s*def (.+?):.*$', re.MULTILINE)
             with open(self.src_file, 'r') as file:
                 #we need to match regex and read lines so do both of these
                 data = file.read()
